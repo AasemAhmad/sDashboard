@@ -12,7 +12,7 @@ sDashboards has built in support for rendering  datatable's and flotr2 charts.  
 
 ##Demo
 
-view an example at : [Link to example](http://modeln.github.com/sDashboard/example/example.html)
+view an example at (New Bootstrap theme) : [Link to example](http://modeln.github.com/sDashboard/example/ex.html)
 
 
 ##Features
@@ -132,7 +132,23 @@ $("#myDashboard").sDashboard({
 });
 ```
 
-##Options
+##Options for dashboard
+
+### dashboardData
+An array of objects, where each object is a widget definition.
+
+### disableSelection
+
+Its an optional parameter, the default value for this property is true, i.e. by default text selection is disabled on all widgets, however if you want to enable text selection, set `disableSelection` to false.
+
+```javascript
+$("#myDashboard").sDashboard({
+	dashboardData : widgetDefinitions,
+	disableSelection : false // enables text selection on the dashboard		
+});
+```
+
+##Options for widget Definitions
 
 Currently while defining the  widget definitions you can use the following options
 
@@ -229,6 +245,38 @@ NOTE: aaData, aoColumns and sTitle are datatables specific keywords, please refe
 
 
 ##Methods
+
+### Refresing a widget
+
+To refresh individual widget you need to specify two new properties  to the widget definition
+* `enableRefresh` :   set to true if you want to display refresh button 
+* `refreshCallBack` : call back function that gets called when refresh button is clicked. This function supplies widgetId as an argument
+These options could be specified at the time of creating a dashboard or while adding widget dynamically.
+
+Here is a example code snippet
+
+```javascript
+$("#myDashboard").sDashboard("addWidget", {
+						widgetTitle : "Bar Chart 2",
+						widgetId : "id005",
+						widgetType : "chart",
+						enableRefresh: true, //set the enableRefresh property to true to display a refresh button on the header
+ 						//define a refresh callback function that gets triggered when refresh button is clicked
+ 						refreshCallBack : function(widgetId){ 
+							var refreshedData = {
+								data : myExampleData.constructBarChartData(),
+								options : myExampleData.barChartOptions
+							};
+							return refreshedData;
+						},
+						widgetContent : {
+							data : myExampleData.barChartData,
+							options : myExampleData.barChartOptions
+						}
+					});
+
+```
+You can see the complete example in `ex.html` under `example` folder.
 
 ### Add a Widget
 
