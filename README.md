@@ -1,5 +1,6 @@
 sDashboard
 ==========
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
 
 A simple &amp; light weight dashboard framework in javascript
 
